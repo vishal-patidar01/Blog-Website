@@ -3,42 +3,45 @@ Supports JWT-based authentication with username/password login, as well as Googl
 
 
 
-🧱 Tech Stack
+## 🏗️ Architecture
 
-🖥️ Frontend
-React (Vite)
-Tailwind CSS
-Axios
-React Router DOM
-ShadCN UI (optional)
-
-⚙️ Backend
-
-Spring Boot 3.x
-Spring Security 6.x
-Spring Data JPA (MySQL)
-OAuth2 Client (Google, GitHub)
-JWT Authentication
-Lombok + HikariCP
-
-
-Screenshots
-
-
-
-
-
-📁 Project Structure
-auth-app-boot-react/
+User Service (9050) ──REST──> Kafka (9092) ──UI──> Kafbat (8080)
 │
-├── backend/                  # Spring Boot Backend
-│   ├── src/
-│   ├── pom.xml
-│   └── application.yml
-│
-├── frontend/                 # React + Vite Frontend
-│   ├── src/
-│   ├── package.json
-│   └── vite.config.js
-│
-└── README.md
+Postgres (5432)
+
+text
+
+## 🚀 Quick Start
+
+docker-compose up -d
+cd user-service && mvn spring-boot:run
+cd kafbat-ui && java -jar kafbat-ui-v1.0.0.jar
+
+text
+
+## 🔄 Message Flow
+
+- POST /users → Kafka producer
+- Kafka topic: `user-events`  
+- Kafbat UI: Real-time monitoring
+- Order Service: Consumer (coming soon)
+
+## 📱 Test Commands
+
+Send message
+curl -X POST http://localhost:9050/users "Hello Kafka"
+
+Check Kafbat UI
+http://localhost:8080
+
+CLI verify
+kafka-console-consumer --topic user-events --bootstrap-server localhost:9092
+
+text
+
+## 📊 Live URLs
+
+User Service: http://localhost:9050  
+Kafbat UI: http://localhost:8080  
+Kafka: localhost:9092  
+Postgres: localhost:5432
