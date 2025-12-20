@@ -4,6 +4,7 @@ Supports JWT-based authentication with username/password login, as well as Googl
 
 
 🧱 Tech Stack
+
 🖥️ Frontend
 React (Vite)
 Tailwind CSS
